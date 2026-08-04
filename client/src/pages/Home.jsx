@@ -1,24 +1,19 @@
-import Navbar from "../components/Navbar";
-import Hero from "../components/Hero";
-import FlightSearch from "../components/FlightSearch";
-import Features from "../components/Features";
-import PopularDestinations from "../components/PopularDestinations";
-import Testimonials from "../components/Testimonials";
-import Newsletter from "../components/Newsletter";
-import Footer from "../components/Footer";
+import React from 'react';
+import Hero from '../components/Hero';
+import Features from '../components/Features';
+import Testimonials from '../components/Testimonials';
+import Newsletter from '../components/Newsletter';
+import Footer from '../components/Footer';
 
 function Home() {
   return (
-    <>
-      <Navbar />
+    <div style={{ background: 'var(--ink, #14110F)', color: 'var(--cream, #F4EDE4)', minHeight: '100vh' }}>
       <Hero />
-      <FlightSearch />
       <Features />
-      <PopularDestinations />
       <Testimonials />
       <Newsletter />
       <Footer />
-    </>
+    </div>
   );
 }
 
