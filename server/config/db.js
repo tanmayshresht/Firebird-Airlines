@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 import dns from "dns";
 
-// Force Google DNS for SRV record resolution
+
 dns.setServers(["8.8.8.8", "8.8.4.4"]);
 
 const connectDB = async () => {

@@ -10,7 +10,7 @@ function Register() {
     e.preventDefault();
     setSuccessMsg(true);
     setTimeout(() => {
-      navigate('/login'); // Registration ke baad login page par bhej rahe hain
+      navigate('/login'); 
     }, 1500);
   };
 
