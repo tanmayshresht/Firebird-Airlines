@@ -4,6 +4,18 @@ import { Link, useNavigate } from 'react-router-dom';
 function Navbar() {
   const navigate = useNavigate();
 
+  // Check karte hain ki user logged in hai ya nahi (localStorage ke basis par)
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+
+  const handleLogout = () => {
+    // Session/Local storage clear karein bina kisi pop-up ke
+    localStorage.removeItem('isLoggedIn');
+    localStorage.removeItem('user');
+    
+    // Login page par redirect karein
+    navigate('/login');
+  };
+
   return (
     <>
       <style>{`
@@ -36,7 +48,7 @@ function Navbar() {
           color: var(--ink); font-weight: bold;
         }
         .nav-links-box { display: flex; align-items: center; gap: 32px; font-size: 0.92rem; color: var(--cream-dim); }
-        .nav-links-box a { transition: color 0.2s ease; }
+        .nav-links-box a { transition: color 0.2s ease; text-decoration: none; color: inherit; }
         .nav-links-box a:hover { color: var(--ember); }
         .nav-actions { display: flex; align-items: center; gap: 20px; }
         .btn-login { font-size: 0.9rem; color: var(--cream-dim); background: none; border: none; cursor: pointer; transition: color 0.2s; }
@@ -70,7 +82,11 @@ function Navbar() {
         </div>
 
         <div className="nav-actions">
-          <button className="btn-login" onClick={() => navigate('/login')}>Login</button>
+          {isLoggedIn ? (
+            <button className="btn-login" onClick={handleLogout}>Logout</button>
+          ) : (
+            <button className="btn-login" onClick={() => navigate('/login')}>Login</button>
+          )}
           <button className="btn-book" onClick={() => navigate('/flights')}>Book Now</button>
         </div>
       </nav>
