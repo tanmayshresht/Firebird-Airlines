@@ -1,24 +1,34 @@
-import { FaPlane } from "react-icons/fa";
+import { FaPlaneDeparture, FaGlobeAmericas, FaShieldAlt, FaAward } from "react-icons/fa";
 
 function Logo() {
   return (
-    <div className="flex items-center gap-3 cursor-pointer">
-      
-      <div className="w-10 h-10 rounded-full bg-gradient-to-r from-orange-500 to-yellow-400 flex items-center justify-center shadow-lg">
-        <FaPlane className="text-white text-lg rotate-[-20deg]" />
+    <section className="bg-[#050816] py-12 border-y border-white/10">
+      <div className="mx-auto max-w-7xl px-6 lg:px-12">
+        <div className="grid grid-cols-2 gap-8 md:grid-cols-4 items-center justify-center text-center">
+          
+          <div className="flex items-center justify-center gap-3 text-gray-400 opacity-80 hover:opacity-100 transition">
+            <FaGlobeAmericas className="text-orange-400 text-2xl" />
+            <span className="font-bold tracking-wider text-white text-sm">GLOBAL ALLIANCE</span>
+          </div>
+
+          <div className="flex items-center justify-center gap-3 text-gray-400 opacity-80 hover:opacity-100 transition">
+            <FaShieldAlt className="text-orange-400 text-2xl" />
+            <span className="font-bold tracking-wider text-white text-sm">ISO 9001 CERTIFIED</span>
+          </div>
+
+          <div className="flex items-center justify-center gap-3 text-gray-400 opacity-80 hover:opacity-100 transition">
+            <FaAward className="text-orange-400 text-2xl" />
+            <span className="font-bold tracking-wider text-white text-sm">BEST AIRLINE 2026</span>
+          </div>
+
+          <div className="flex items-center justify-center gap-3 text-gray-400 opacity-80 hover:opacity-100 transition">
+            <FaPlaneDeparture className="text-orange-400 text-2xl" />
+            <span className="font-bold tracking-wider text-white text-sm">SKYTRAX 5-STAR</span>
+          </div>
+
+        </div>
       </div>
-
-      <div>
-        <h1 className="text-xl font-bold tracking-wide">
-          Firebird
-        </h1>
-
-        <p className="text-xs text-gray-300 tracking-widest">
-          AIRLINES
-        </p>
-      </div>
-
-    </div>
+    </section>
   );
 }
 

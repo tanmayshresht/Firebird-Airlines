@@ -1,61 +1,80 @@
-import { FaPlaneDeparture } from "react-icons/fa6";
+import React from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Navbar() {
-  return (
-    <header className="fixed top-0 left-0 w-full z-50">
-      <nav className="mx-auto mt-5 flex w-[92%] max-w-7xl items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-8 py-4 backdrop-blur-xl">
-        
-        {/* Logo */}
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-full bg-orange-500 text-white shadow-lg shadow-orange-500/40">
-            <FaPlaneDeparture size={20} />
-          </div>
+  const navigate = useNavigate();
 
-          <div>
-            <h1 className="text-xl font-bold tracking-wide">
-              Firebird Airlines
-            </h1>
-            <p className="text-xs text-gray-400">
-              Rise Beyond Horizons
-            </p>
+  return (
+    <>
+      <style>{`
+        :root {
+          --ink: #14110F;
+          --ember: #FF6B35;
+          --gold: #F7B32B;
+          --cream: #F4EDE4;
+          --cream-dim: #C9BFB0;
+          --line: rgba(244,237,228,0.14);
+        }
+        .navbar-custom {
+          position: sticky; top: 0; z-index: 50;
+          display: flex; align-items: center; justify-content: space-between;
+          padding: 18px 6vw;
+          background: rgba(20, 17, 15, 0.85);
+          backdrop-filter: blur(10px);
+          border-bottom: 1px solid var(--line);
+          font-family: 'Manrope', sans-serif;
+        }
+        .logo-box {
+          display: flex; align-items: center; gap: 12px;
+          font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.25rem;
+          color: var(--cream); cursor: text;
+        }
+        .logo-icon {
+          display: flex; align-items: center; justify-content: center;
+          width: 36px; height: 36px; border-radius: 10px;
+          background: linear-gradient(135deg, var(--ember), var(--gold));
+          color: var(--ink); font-weight: bold;
+        }
+        .nav-links-box { display: flex; align-items: center; gap: 32px; font-size: 0.92rem; color: var(--cream-dim); }
+        .nav-links-box a { transition: color 0.2s ease; }
+        .nav-links-box a:hover { color: var(--ember); }
+        .nav-actions { display: flex; align-items: center; gap: 20px; }
+        .btn-login { font-size: 0.9rem; color: var(--cream-dim); background: none; border: none; cursor: pointer; transition: color 0.2s; }
+        .btn-login:hover { color: var(--cream); }
+        .btn-book {
+          font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.85rem;
+          padding: 10px 22px; border-radius: 100px;
+          background: var(--ember); color: var(--ink);
+          border: none; cursor: pointer; transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+        .btn-book:hover { transform: translateY(-2px); box-shadow: 0 10px 26px rgba(255,107,53,0.35); }
+      `}</style>
+
+      <nav className="navbar-custom">
+        <Link to="/" style={{ textDecoration: 'none' }}>
+          <div className="logo-box">
+            <div className="logo-icon">✈</div>
+            <div>
+              <div style={{ lineHeight: '1.1' }}>FIREBIRD</div>
+              <div style={{ fontSize: '9px', fontFamily: 'JetBrains Mono, monospace', letterSpacing: '0.2em', color: 'var(--gold)' }}>AIRLINES</div>
+            </div>
           </div>
+        </Link>
+
+        <div className="nav-links-box">
+          <Link to="/">Home</Link>
+          <Link to="/flights">Flights</Link>
+          <Link to="/destinations">Destinations</Link>
+          <Link to="/dashboard">Dashboard</Link>
+          <Link to="/contact">Contact</Link>
         </div>
 
-        {/* Navigation */}
-        <ul className="hidden gap-8 text-sm font-medium md:flex">
-          <li className="cursor-pointer transition hover:text-orange-400">
-            Home
-          </li>
-
-          <li className="cursor-pointer transition hover:text-orange-400">
-            Flights
-          </li>
-
-          <li className="cursor-pointer transition hover:text-orange-400">
-            Destinations
-          </li>
-
-          <li className="cursor-pointer transition hover:text-orange-400">
-            Experience
-          </li>
-
-          <li className="cursor-pointer transition hover:text-orange-400">
-            Contact
-          </li>
-        </ul>
-
-        {/* Buttons */}
-        <div className="hidden items-center gap-4 md:flex">
-          <button className="text-gray-300 hover:text-white transition">
-            Login
-          </button>
-
-          <button className="rounded-xl bg-orange-500 px-5 py-2 font-semibold transition hover:bg-orange-600">
-            Book Now
-          </button>
+        <div className="nav-actions">
+          <button className="btn-login" onClick={() => navigate('/login')}>Login</button>
+          <button className="btn-book" onClick={() => navigate('/flights')}>Book Now</button>
         </div>
       </nav>
-    </header>
+    </>
   );
 }
 
