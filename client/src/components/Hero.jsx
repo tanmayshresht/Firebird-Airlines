@@ -89,34 +89,6 @@ function Hero() {
           100% { opacity: 1; transform: translate(0,0) rotate(0deg); }
         }
 
-        .ticket-box {
-          position: relative; z-index: 2;
-          margin: 0 6vw 8vh;
-          background: var(--cream); color: var(--ink);
-          border-radius: 18px;
-          display: grid; grid-template-columns: 1fr 1fr 1fr 1fr auto;
-          box-shadow: 0 30px 60px rgba(0,0,0,0.45);
-        }
-        .ticket-field {
-          padding: 20px 26px; border-right: 1px dashed rgba(20,17,15,0.2);
-        }
-        .ticket-field:last-of-type { border-right: none; }
-        .ticket-field label {
-          display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem;
-          letter-spacing: 0.12em; text-transform: uppercase; color: rgba(20,17,15,0.5);
-          margin-bottom: 6px;
-        }
-        .ticket-field .val { font-family: 'Fraunces', serif; font-weight: 600; font-size: 1.15rem; }
-        .ticket-field .sub2 { font-size: 0.78rem; color: rgba(20,17,15,0.55); margin-top: 2px; }
-        .ticket-go {
-          display: flex; align-items: center; justify-content: center;
-          background: var(--ink); color: var(--cream); padding: 0 34px;
-          border-radius: 0 18px 18px 0;
-          font-weight: 700; font-size: 0.9rem; cursor: pointer; gap: 8px;
-          transition: background .2s;
-        }
-        .ticket-go:hover { background: var(--ruby); }
-
         .board-section { padding: 10vh 6vw; position: relative; z-index: 1; }
         .section-head { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 44px; flex-wrap: wrap; gap: 16px; }
         .section-head h2 { font-family: 'Fraunces', serif; font-weight: 500; font-size: clamp(1.8rem,3vw,2.6rem); }
@@ -158,29 +130,10 @@ function Hero() {
         .feature-item h3 { font-family: 'Fraunces', serif; font-weight: 500; font-size: 1.4rem; margin: 18px 0 12px; }
         .feature-item p { color: var(--cream-dim); font-size: 0.92rem; line-height: 1.6; }
 
-        .dest-section { padding: 6vh 6vw 10vh; }
-        .dest-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; margin-top: 40px; }
-        .dest-card {
-          position: relative; border-radius: 16px; padding: 26px 22px; min-height: 190px;
-          display: flex; flex-direction: column; justify-content: space-between;
-          border: 1px solid var(--line); overflow: hidden; cursor: pointer;
-          transition: transform .3s ease, border-color .3s ease;
-        }
-        .dest-card:hover { transform: translateY(-6px); border-color: var(--ember); }
-        .dest-card .content { position: relative; z-index: 1; }
-        .dest-card .code { font-family: 'JetBrains Mono', monospace; font-size: 0.75rem; color: var(--gold); letter-spacing: 0.1em; }
-        .dest-card .city { font-family: 'Fraunces', serif; font-style: italic; font-size: 1.5rem; margin-top: 8px; }
-        .dest-card .fare { font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; color: var(--cream-dim); margin-top: auto; padding-top: 14px; }
-        .dest-card .fare b { color: var(--cream); font-weight: 700; }
-
         @media (max-width: 900px) {
           .hero-section { grid-template-columns: 1fr; padding-top: 6vh; }
           .firebird-art { height: 280px; order: -1; }
-          .ticket-box { grid-template-columns: 1fr 1fr; border-radius: 18px; }
-          .ticket-field { border-right: none; border-bottom: 1px dashed rgba(20,17,15,0.2); }
-          .ticket-go { grid-column: span 2; border-radius: 0 0 18px 18px; padding: 18px; }
           .features-grid { grid-template-columns: 1fr; }
-          .dest-grid { grid-template-columns: 1fr 1fr; }
           .board-row { grid-template-columns: 60px 1fr 80px; font-size: 0.78rem; }
           .board-row :nth-child(4), .board-row :nth-child(5) { display: none; }
         }
@@ -201,7 +154,7 @@ function Hero() {
             </p>
             <div className="hero-cta">
               <a className="btn-custom" href="#board">See departures</a>
-              <a className="btn-custom ghost" href="#destinations">Explore routes</a>
+              <button className="btn-custom ghost" onClick={() => navigate('/destinations')}>Explore routes</button>
             </div>
           </div>
           <div className="firebird-art">
@@ -221,35 +174,6 @@ function Hero() {
             </svg>
           </div>
         </section>
-
-        {/* TICKET WIDGET */}
-        <div style={{ position: 'relative' }}>
-          <div className="ticket-box">
-            <div className="ticket-field">
-              <label>From</label>
-              <div className="val">HYD</div>
-              <div className="sub2">Hyderabad</div>
-            </div>
-            <div className="ticket-field">
-              <label>To</label>
-              <div className="val">MAA</div>
-              <div className="sub2">Chennai</div>
-            </div>
-            <div className="ticket-field">
-              <label>Depart</label>
-              <div className="val">14 Aug</div>
-              <div className="sub2">Friday</div>
-            </div>
-            <div className="ticket-field">
-              <label>Traveller</label>
-              <div className="val">1 Adult</div>
-              <div className="sub2">Economy</div>
-            </div>
-            <div className="ticket-go" onClick={() => navigate('/flights')}>
-              Search flights →
-            </div>
-          </div>
-        </div>
 
         {/* BOARD SECTION */}
         <section className="board-section" id="board">
@@ -312,46 +236,6 @@ function Hero() {
             <div className="num">03</div>
             <h3>One bag, no arguments</h3>
             <p>15kg check-in and a full-size cabin bag included in every fare, every route.</p>
-          </div>
-        </section>
-
-        {/* DESTINATIONS SECTION */}
-        <section className="dest-section" id="destinations">
-          <div className="section-head">
-            <div>
-              <h2>Where we fly</h2>
-              <p>Six domestic anchors and two routes across the water.</p>
-            </div>
-          </div>
-          <div className="dest-grid">
-            <div className="dest-card" style={{ background: 'linear-gradient(160deg, rgba(255,107,53,0.18), transparent)' }}>
-              <div className="content">
-                <div className="code">MAA</div>
-                <div className="city">Chennai</div>
-              </div>
-              <div className="fare">From <b>₹2,199</b></div>
-            </div>
-            <div className="dest-card" style={{ background: 'linear-gradient(160deg, rgba(247,179,43,0.16), transparent)' }}>
-              <div className="content">
-                <div className="code">BLR</div>
-                <div className="city">Bengaluru</div>
-              </div>
-              <div className="fare">From <b>₹1,899</b></div>
-            </div>
-            <div className="dest-card" style={{ background: 'linear-gradient(160deg, rgba(139,30,63,0.22), transparent)' }}>
-              <div className="content">
-                <div className="code">DEL</div>
-                <div className="city">Delhi</div>
-              </div>
-              <div className="fare">From <b>₹3,450</b></div>
-            </div>
-            <div className="dest-card" style={{ background: 'linear-gradient(160deg, rgba(255,107,53,0.14), transparent)' }}>
-              <div className="content">
-                <div className="code">BOM</div>
-                <div className="city">Mumbai</div>
-              </div>
-              <div className="fare">From <b>₹2,760</b></div>
-            </div>
           </div>
         </section>
 
