@@ -6,7 +6,7 @@ Firebird Airlines is a production-quality, responsive flight booking web applica
 ---
 
 ## 🚀 Live Demo
-- **Live URL:** [View Live Application](https://firebird-airlines-git-main-tanmay-projects1.vercel.app)
+- **Live URL:** https://firebird-airlines-git-main-tanmay-projects1.vercel.app
 
 ---
 
