@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
 function Login() {
@@ -11,7 +11,7 @@ function Login() {
     setSuccessMsg(true);
     setTimeout(() => {
       navigate('/dashboard');
-    }, 1500); // 1.5 second baad redirect hoga
+    }, 1500); 
   };
 
   return (

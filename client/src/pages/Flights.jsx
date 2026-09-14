@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function Flights() {
@@ -71,7 +71,7 @@ function Flights() {
     for (let i = 1; i <= 4; i++) {
       const randomHour = (i * 4 + 2) % 24;
       const formattedHour = `${randomHour > 12 ? randomHour - 12 : randomHour}:00 ${randomHour >= 12 ? 'PM' : 'AM'}`;
-      
+
       generated.push({
         id: `flight-${i}`,
         flightNumber: `FB ${100 + i * 7}`,
@@ -124,7 +124,13 @@ function Flights() {
         }
         .page-container { background: var(--ink); color: var(--cream); font-family: 'Manrope', sans-serif; min-height: 100vh; padding: 6vh 6vw; }
         .search-card { background: var(--ink-soft); border: 1px solid var(--line); border-radius: 20px; padding: 30px; margin-bottom: 40px; box-shadow: 0 30px 60px rgba(0,0,0,0.5); }
-        .search-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 15px; margin-bottom: 20px; position: relative; }
+
+        /* Mobile-first: stacked by default, 3 columns only from 700px up */
+        .search-grid { display: grid; grid-template-columns: 1fr; gap: 15px; margin-bottom: 20px; position: relative; }
+        @media (min-width: 700px) {
+          .search-grid { grid-template-columns: 1fr 1fr 1fr; }
+        }
+
         .search-box-item { background: var(--ink); border: 1px solid var(--line); border-radius: 14px; padding: 14px 18px; position: relative; cursor: pointer; }
         .search-box-item label { display: block; font-family: 'JetBrains Mono', monospace; font-size: 0.68rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--cream-dim); margin-bottom: 4px; }
         .search-box-item input { width: 100%; background: transparent; border: none; color: var(--cream); font-family: 'Manrope', sans-serif; font-size: 1rem; font-weight: 600; outline: none; }
@@ -143,11 +149,24 @@ function Flights() {
         .btn-done { width: 100%; padding: 14px; border-radius: 100px; background: var(--ember); color: var(--ink); font-weight: 800; font-size: 0.95rem; border: none; cursor: pointer; }
         .btn-search-flights { width: 100%; padding: 16px; border-radius: 12px; background: linear-gradient(135deg, var(--ember), #e55a24); color: var(--cream); font-weight: 800; font-size: 1rem; border: none; cursor: pointer; box-shadow: 0 10px 25px rgba(255,107,53,0.3); transition: transform 0.2s; margin-top: 10px; }
         .btn-search-flights:hover { transform: translateY(-2px); }
-        .board { background: var(--ink-soft); border: 1px solid var(--line); border-radius: 14px; overflow: hidden; margin-top: 20px; }
-        .board-row { display: grid; grid-template-columns: 90px 1.2fr 1fr 90px 90px 100px 100px; align-items: center; padding: 18px 26px; border-bottom: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; }
+
+        .board { background: var(--ink-soft); border: 1px solid var(--line); border-radius: 14px; overflow-x: auto; margin-top: 20px; }
+
+        /* Desktop: all 7 columns */
+        .board-row { display: grid; grid-template-columns: 90px 1.2fr 1fr 90px 90px 100px 100px; align-items: center; padding: 18px 26px; border-bottom: 1px solid var(--line); font-family: 'JetBrains Mono', monospace; font-size: 0.85rem; gap: 8px; }
         .board-row.head { color: var(--cream-dim); font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase; background: rgba(255,255,255,0.02); }
         .flap { display: inline-block; background: var(--ink); border-radius: 4px; padding: 5px 8px; color: var(--gold); font-weight: 700; }
         .btn-select { font-family: 'Manrope', sans-serif; font-weight: 700; font-size: 0.8rem; padding: 8px 16px; border-radius: 100px; background: var(--ember); color: var(--ink); border: none; cursor: pointer; }
+
+        /* Mobile: drop Time, Status, Seats — keep Flight, Route, Price, Action */
+        @media (max-width: 640px) {
+          .board-row {
+            grid-template-columns: 64px 1fr 74px 60px;
+            padding: 14px 14px;
+            font-size: 0.75rem;
+          }
+          .hide-mobile { display: none; }
+        }
       `}</style>
 
       <div className="page-container" ref={dropdownRef} onClick={() => setActiveInput(null)}>
@@ -159,10 +178,10 @@ function Flights() {
             <div className="search-grid">
               <div className="search-box-item">
                 <label>From</label>
-                <input 
-                  type="text" 
-                  placeholder="Type any city (e.g. Delhi, London)" 
-                  value={fromQuery} 
+                <input
+                  type="text"
+                  placeholder="Type any city (e.g. Delhi, London)"
+                  value={fromQuery}
                   onChange={(e) => { setFromQuery(e.target.value); setActiveInput('from'); }}
                   onFocus={() => setActiveInput('from')}
                 />
@@ -179,10 +198,10 @@ function Flights() {
 
               <div className="search-box-item">
                 <label>To</label>
-                <input 
-                  type="text" 
-                  placeholder="Type destination (e.g. Tokyo, NY)" 
-                  value={toQuery} 
+                <input
+                  type="text"
+                  placeholder="Type destination (e.g. Tokyo, NY)"
+                  value={toQuery}
                   onChange={(e) => { setToQuery(e.target.value); setActiveInput('to'); }}
                   onFocus={() => setActiveInput('to')}
                 />
@@ -279,7 +298,13 @@ function Flights() {
             </h3>
             <div className="board">
               <div className="board-row head">
-                <div>Flight</div><div>Route</div><div>Time</div><div>Status</div><div>Seats</div><div>Price</div><div>Action</div>
+                <div>Flight</div>
+                <div>Route</div>
+                <div className="hide-mobile">Time</div>
+                <div className="hide-mobile">Status</div>
+                <div className="hide-mobile">Seats</div>
+                <div>Price</div>
+                <div>Action</div>
               </div>
               {generatedFlights.map(f => {
                 const statusInfo = getFlightStatus(f.baseHour, date);
@@ -287,9 +312,9 @@ function Flights() {
                   <div className="board-row" key={f.id}>
                     <div><span className="flap">{f.flightNumber}</span></div>
                     <div>{f.from.split(' ')[0]} → {f.to.split(' ')[0]}</div>
-                    <div>{f.time}</div>
-                    <div style={{ color: statusInfo.color, fontWeight: 700 }}>{statusInfo.status}</div>
-                    <div style={{ color: '#7CC77E', fontWeight: 700 }}>{f.seatsLeft} left</div>
+                    <div className="hide-mobile">{f.time}</div>
+                    <div className="hide-mobile" style={{ color: statusInfo.color, fontWeight: 700 }}>{statusInfo.status}</div>
+                    <div className="hide-mobile" style={{ color: '#7CC77E', fontWeight: 700 }}>{f.seatsLeft} left</div>
                     <div style={{ color: 'var(--gold)', fontWeight: 700 }}>{f.price}</div>
                     <div>
                       <button className="btn-select" onClick={() => navigate('/booking', { state: { flight: f } })}>
